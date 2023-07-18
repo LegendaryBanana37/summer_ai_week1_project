@@ -13,31 +13,63 @@ if __name__ == "__main__":
     print("          Welcome to Summer AI Social Network")
     print("########################################################")
     last_menu = None
-    choice = social_network_ui.mainMenu()
+    while True:
+        choiceMain = social_network_ui.mainMenu()
+        currentUser = Person("", 0)
+        while True: 
+            if choiceMain == "1":
+                currentUser = ai_social_network.login()
+                manageAccountMenuChoice = social_network_ui.manageAccountMenu()
+                while True:
+                    if manageAccountMenuChoice == "1":
+                        currentUser.editDetails()
+                        break
+                    elif manageAccountMenuChoice == "2":
+                        for i in range(len(ai_social_network.list_of_people)):
+                            print(i+1,ai_social_network.list_of_people[i].name)
+                        friendInput = int(input("Please choose a number:"))
+                        currentUser.add_friend(ai_social_network.list_of_people[friendInput-1])
+                        break
+                    elif manageAccountMenuChoice == "3":
+                        currentUser.view_friends()
+                        break
+                    elif manageAccountMenuChoice == "4":
+                        for i in range(len(ai_social_network.list_of_people)):
+                            print(i+1,ai_social_network.list_of_people[i].name)
+                        blockInput = int(input("Please choose a number:"))
+                        currentUser.block(ai_social_network.list_of_people[blockInput-1])
+                        break
+                    elif manageAccountMenuChoice == "5":
+                        for i in range(len(ai_social_network.list_of_people)):
+                            print(i+1,ai_social_network.list_of_people[i].name)
+                        messageChoiceInput = int(input("Please choose a number:"))
+                        if ai_social_network.list_of_people[messageChoiceInput-1].blockList.__contains__(currentUser):
+                            print("YOU HAVE BEEN BLOCKED!")
+                            break
+                        else:
+                            messageInput = input("Enter message")
+                            currentUser.send_message(currentUser, ai_social_network.list_of_people[messageChoiceInput-1], messageInput)
+                            break
+                    elif manageAccountMenuChoice == "6":
+                        currentUser.view_messages()
+                        break
+                    elif manageAccountMenuChoice == "7":
+                        break
+                    else:
+                        manageAccountMenuChoice = social_network_ui.manageAccountMenu()
+                break
+            elif choiceMain == "2":
+                ai_social_network.create_account()
+                break
 
-    while True: 
-        if choice == "1":
-            print("\nYou are now in the create account menu")
-            ai_social_network.create_account()
+            elif choiceMain == "3":
+                print("Thank you for visiting. Goodbye.")
+                quit()
 
-        elif choice == "2":
-            inner_menu_choice = social_network_ui.manageAccountMenu()
-            #Handle inner menu here
-            while True:
-                if inner_menu_choice == "5":
-                    break
-                else:
-                    inner_menu_choice = social_network_ui.manageAccountMenu()
-
-        elif choice == "3":
-            print("Thank you for visiting. Goodbye3")
-            break
-
-        else:
-            print("Your input is invalid. Try Again!")
-        
+            else:
+                print("Your input is invalid. Try Again!")
         #restart menu
-        choice = social_network_ui.mainMenu()
+            break
 
 
 

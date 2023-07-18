@@ -2,17 +2,16 @@
 
 def mainMenu():
     print("")
-    print("1. Create a new account")
-    print("2. Manage my account")
+    print("1. Login")
+    print("2. Create new account.")
     print("3. Quit")
-    print("********************************************************")
     return input("Please Choose a number: ")
-
 def manageAccountMenu():
-    print("")
     print("1. Edit my details")
     print("2. Add a friend")
     print("3. View all my friends")
-    print("4. View all my messages")
-    print("5. <- Go back ")
+    print("4. Block friend")
+    print("5. Send message")
+    print("6. View all my messages")
+    print("7. <- Log out ")
     return input("Please Choose a number: ")
